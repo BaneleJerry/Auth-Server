@@ -28,3 +28,6 @@ tmp/
 # Project build
 main
 *templ.go
+
+# Config Database
+internal/config/database.yaml

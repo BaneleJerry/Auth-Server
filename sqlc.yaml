@@ -1,0 +1,8 @@
+version: "2"
+sql:
+  - queries: "./internal/data/migrations/queries"
+    schema: "./internal/data/migrations/schema"
+    engine: "postgresql"
+    gen:
+      go:
+        out: "./internal/data/database"

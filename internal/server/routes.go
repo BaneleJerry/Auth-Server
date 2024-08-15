@@ -1,6 +1,7 @@
 package server
 
 import (
+	"Auth-Server/internal/handler"
 	"encoding/json"
 	"log"
 	"net/http"
@@ -11,9 +12,15 @@ import (
 
 func (s *Server) RegisterRoutes() http.Handler {
 	r := chi.NewRouter()
+	db := handler.NewDBConfig(s.Database)
 	r.Use(middleware.Logger)
 
 	r.Get("/", s.HelloWorldHandler)
+
+	r.Route("/users", func(r chi.Router) {
+		r.Post("/signup", db.SignUpHandler)
+		r.Post("/login", db.LoginHandler)
+	})
 
 	return r
 }

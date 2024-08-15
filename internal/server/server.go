@@ -1,6 +1,7 @@
 package server
 
 import (
+	"Auth-Server/internal/data/database"
 	"fmt"
 	"net/http"
 	"os"
@@ -11,13 +12,15 @@ import (
 )
 
 type Server struct {
-	port int
+	port     int
+	Database *database.Queries
 }
 
-func NewServer() *http.Server {
+func NewServer(q *database.Queries) *http.Server {
 	port, _ := strconv.Atoi(os.Getenv("PORT"))
 	NewServer := &Server{
-		port: port,
+		port:     port,
+		Database: q,
 	}
 
 	// Declare Server config
